@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class VISION : MonoBehaviour
+public class raycast : MonoBehaviour
 {
     private AgentScript agentScript;
     float RaycastDistancia = 5f;

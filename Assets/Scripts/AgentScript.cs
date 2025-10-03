@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class AgentScript : MonoBehaviour
 {
     NavMeshAgent agent;
+    [SerializeField] Transform targetTR;
     [SerializeField] Animator anim;
     [SerializeField] float velocity;
     [SerializeField] Transform[] Puntos;
@@ -37,12 +39,12 @@ public class AgentScript : MonoBehaviour
                 agent.SetDestination(Puntos[currentPatrolPoint].position);
             }
         }
-        else
-        {
-            agent.SetDestination(jugador.transform.position);
-        }
-        velocity = agent.velocity.magnitude;
-        anim.SetFloat("Speed", velocity);
+            else
+            {
+                agent.SetDestination(jugador.transform.position);   
+            }
+            velocity = agent.velocity.magnitude;
+            anim.SetFloat("Speed",velocity);
     }
 
     public void OnTriggerEnter(Collider other)

@@ -6,6 +6,7 @@ public class raycast : MonoBehaviour
 {
     private AgentScript agentScript;
     [SerializeField] private float RaycastDistancia = 8f; // un poco más largo para que detecte mejor
+    [SerializeField] private Transform RaycastOrigin;
 
     void Start()
     {
@@ -17,10 +18,10 @@ public class raycast : MonoBehaviour
         bool JugadorDetectado = false;
 
         // Dibujar el rayo rojo
-        Debug.DrawRay(transform.position + Vector3.up * 1f, transform.forward * RaycastDistancia, Color.red);
+        Debug.DrawRay(RaycastOrigin.position, transform.forward * RaycastDistancia, Color.red);
 
         // Lanzar raycast desde un poco más arriba
-        if (Physics.Raycast(transform.position + Vector3.up * 1f, transform.forward, out RaycastHit hitInfo, RaycastDistancia))
+        if (Physics.Raycast(RaycastOrigin.position, transform.forward, out RaycastHit hitInfo, RaycastDistancia))
         {
             if (hitInfo.collider.CompareTag("Player"))
             {
@@ -28,6 +29,10 @@ public class raycast : MonoBehaviour
                 agentScript.jugadorEnVision = true;
                 agentScript.tiempoSinVision = 0;
                 JugadorDetectado = true;
+            }
+            else
+            {
+                JugadorDetectado = false;
             }
         }
 
@@ -42,7 +47,7 @@ public class raycast : MonoBehaviour
 
             if (agentScript.tiempoSinVision >= 500)
             {
-                agentScript.ReiniciarPatrulla();
+                agentScript.patrullando = true;
             }
         }
     }

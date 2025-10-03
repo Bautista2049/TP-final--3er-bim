@@ -765,22 +765,22 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1900027652}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8301348219256438973, guid: d23a71d629ca2cb428e58efdcf5d4c1b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.79607713
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 8301348219256438973, guid: d23a71d629ca2cb428e58efdcf5d4c1b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7086973
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 8301348219256438973, guid: d23a71d629ca2cb428e58efdcf5d4c1b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.594472
+      value: 15.35
       objectReference: {fileID: 0}
     - target: {fileID: 8301348219256438973, guid: d23a71d629ca2cb428e58efdcf5d4c1b,
         type: 3}
@@ -805,7 +805,7 @@ PrefabInstance:
     - target: {fileID: 8301348219256438973, guid: d23a71d629ca2cb428e58efdcf5d4c1b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8301348219256438973, guid: d23a71d629ca2cb428e58efdcf5d4c1b,
         type: 3}
@@ -3138,12 +3138,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181396631}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1194449266 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8301348219256438973, guid: d23a71d629ca2cb428e58efdcf5d4c1b,
-    type: 3}
-  m_PrefabInstance: {fileID: 311576345}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1199984285
 GameObject:
   m_ObjectHideFlags: 0
@@ -5124,6 +5118,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830951326}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1860184963 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 3fb269cac241226408bf2d63c2dbe471,
+    type: 3}
+  m_PrefabInstance: {fileID: 1978980602}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867853263
 GameObject:
   m_ObjectHideFlags: 0
@@ -5306,37 +5306,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880699706}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1900027651
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1900027652}
-  m_Layer: 0
-  m_Name: Personaje
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1900027652
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900027651}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9960772, y: 1.0913026, z: 1.7555282}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1194449266}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1915386992
 GameObject:
   m_ObjectHideFlags: 0
@@ -6538,7 +6507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ecd01f53f9ecb4a8ac1823d626d864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTR: {fileID: 1900027652}
+  targetTR: {fileID: 0}
   anim: {fileID: 1622287060}
   velocity: 4
   Puntos:
@@ -6551,7 +6520,7 @@ MonoBehaviour:
   - {fileID: 1617671501}
   - {fileID: 556433098}
   patrullando: 1
-  jugador: {fileID: 1900027651}
+  jugador: {fileID: 1722128524}
   jugadorEnVision: 1
   tiempoSinVision: 5
 --- !u!114 &2130074509
@@ -6566,6 +6535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e073251dec05e84893a2cb46415f334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RaycastDistancia: 8
+  RaycastOrigin: {fileID: 1860184963}
 --- !u!1 &2131770844
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,8 @@ public class AgentScript : MonoBehaviour
     public bool jugadorEnVision = false;
     public int tiempoSinVision = 0;
 
+     
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -27,12 +29,15 @@ public class AgentScript : MonoBehaviour
 
     private void Start()
     {
-        // Ir al primer punto de patrulla al empezar
-        if (Puntos.Length > 0)
-        {
-            agent.SetDestination(Puntos[0].position);
-        }
+    // Asignar jugador si no está
+    if (jugador == null)
+        jugador = GameObject.FindGameObjectWithTag("Player");
+
+    // Ir al primer punto de patrulla
+    if (Puntos.Length > 0)
+        agent.SetDestination(Puntos[0].position);
     }
+
 
     private void Update()
     {

@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class AgentScript : MonoBehaviour
 {
-    NavMeshAgent agent;
-    [SerializeField] Transform targetTR;
-    [SerializeField] Animator anim;
-    [SerializeField] float velocity;
-    [SerializeField] Transform[] Puntos;
-    public bool patrullando = true;
+    private NavMeshAgent agent;
+    [SerializeField] private Animator anim;
+    [SerializeField] private float velocity;
+
+    [Header("Patrulla")]
+    [SerializeField] private Transform[] Puntos;
     private int currentPatrolPoint = 0;
+    public bool patrullando = true;
+
+    [Header("Jugador")]
     public GameObject jugador;
     public bool jugadorEnVision = false;
     public int tiempoSinVision = 0;
@@ -21,33 +24,62 @@ public class AgentScript : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
+        // Ir al primer punto de patrulla al empezar
+        if (Puntos.Length > 0)
+        {
+            agent.SetDestination(Puntos[0].position);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-
         if (patrullando)
         {
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            {
-                currentPatrolPoint = (currentPatrolPoint + 1) % Puntos.Length;
-                agent.SetDestination(Puntos[currentPatrolPoint].position);
-            }
+            Patrullar();
         }
-            else
-            {
-                agent.SetDestination(jugador.transform.position);   
-            }
-            velocity = agent.velocity.magnitude;
-            anim.SetFloat("Speed",velocity);
+        else
+        {
+            PerseguirJugador();
+        }
+
+        velocity = agent.velocity.magnitude;
+        anim.SetFloat("Speed", velocity);
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void Patrullar()
+    {
+        if (Puntos.Length == 0) return;
+
+        // Si llegó al punto, pasa al siguiente
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            currentPatrolPoint = (currentPatrolPoint + 1) % Puntos.Length;
+            agent.SetDestination(Puntos[currentPatrolPoint].position);
+        }
+    }
+
+    private void PerseguirJugador()
+    {
+        if (jugador != null)
+        {
+            agent.SetDestination(jugador.transform.position);
+        }
+    }
+
+    public void ReiniciarPatrulla()
+    {
+        patrullando = true;
+        tiempoSinVision = 0;
+        if (Puntos.Length > 0)
+        {
+            agent.SetDestination(Puntos[currentPatrolPoint].position);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {

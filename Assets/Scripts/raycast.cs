@@ -5,7 +5,7 @@ using UnityEngine;
 public class raycast : MonoBehaviour
 {
     private AgentScript agentScript;
-    float RaycastDistancia = 5f;
+    [SerializeField] private float RaycastDistancia = 8f; // un poco más largo para que detecte mejor
 
     void Start()
     {
@@ -16,11 +16,13 @@ public class raycast : MonoBehaviour
     {
         bool JugadorDetectado = false;
 
-        Debug.DrawRay(transform.position, transform.forward * RaycastDistancia, Color.red);
+        // Dibujar el rayo rojo
+        Debug.DrawRay(transform.position + Vector3.up * 1f, transform.forward * RaycastDistancia, Color.red);
 
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, RaycastDistancia))
+        // Lanzar raycast desde un poco más arriba
+        if (Physics.Raycast(transform.position + Vector3.up * 1f, transform.forward, out RaycastHit hitInfo, RaycastDistancia))
         {
-            if (hitInfo.collider.gameObject.tag == "Player")
+            if (hitInfo.collider.CompareTag("Player"))
             {
                 agentScript.patrullando = false;
                 agentScript.jugadorEnVision = true;
@@ -37,11 +39,10 @@ public class raycast : MonoBehaviour
         if (!agentScript.jugadorEnVision && !agentScript.patrullando)
         {
             agentScript.tiempoSinVision += (int)(Time.deltaTime * 100);
-            Debug.Log(agentScript.tiempoSinVision);
+
             if (agentScript.tiempoSinVision >= 500)
             {
-                agentScript.patrullando = true;
-                agentScript.tiempoSinVision = 0;
+                agentScript.ReiniciarPatrulla();
             }
         }
     }
